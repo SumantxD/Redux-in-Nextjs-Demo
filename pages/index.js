@@ -1,7 +1,14 @@
 import Head from 'next/head'
+import { useDispatch, useSelector } from 'react-redux'
+import { decrement, increment } from '../features/counter';
 
 
 export default function Home() {
+
+  //i want to read this variable fron this reducer
+  const {value} = useSelector(state => state.counter)
+  const dispatch = useDispatch();//call any action from any reducer
+
   return (
     <div>
       <Head>
@@ -15,15 +22,19 @@ export default function Home() {
 
             <div className='flex gap-x-6'>
 
-              <button className=' bg-green-700 w-14 rounded-md border-2 border-green-300 text-xl text-green-200'>
+              <button className=' bg-green-700 w-14 rounded-md border-2 border-green-300 text-xl text-green-200'
+               onClick={()=>dispatch(increment())}
+              >
                   P+
               </button>
 
                 <p>
-                  counter
+                  counter{value}
                 </p>
 
-              <button className=' bg-green-700 w-14 rounded-md border-2 border-green-300 text-xl text-green-200'>
+              <button className=' bg-green-700 w-14 rounded-md border-2 border-green-300 text-xl text-green-200'
+                onClick={()=>dispatch(decrement())}
+              >
                   M-
               </button>
 
